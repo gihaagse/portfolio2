@@ -1,9 +1,16 @@
 import java.time.LocalDate;
 
-public class Gebruiker {
+public abstract class Gebruiker {
     private String naam;
     private String achternaam;
     private LocalDate geboortedatum;
+
+    public Gebruiker(String naam, String achternaam, LocalDate geboortedatum){
+        this.naam = naam;
+        this.achternaam = achternaam;
+        this.geboortedatum = geboortedatum;
+
+    }
 
     public String getNaam() {
         return naam;

@@ -1,9 +1,17 @@
 import java.util.ArrayList;
 
-public class Azc extends Plaats {
+public class Azc  {
+    private String naam;
     private String adres;
     private ArrayList<Asielzoeker> asielzoekers;
 
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
     public String getAdres() {
         return adres;
     }
