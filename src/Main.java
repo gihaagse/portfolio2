@@ -21,34 +21,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welkom in het programma");
         System.out.println();
-        System.out.println("Wat is uw voornaam?");
-        System.out.println("voornaam: ");
-        String voornaam = scanner.nextLine();
-
-        System.out.println();
-        System.out.println("Wat is uw achternaam?");
-        System.out.println("Achternaam: ");
-        String achternaam = scanner.nextLine();
-
-        System.out.println();
-        System.out.println("Wat is uw geboortejaar?");
-        System.out.println("Geboortejaar: ");
-        int geboorteJaar = scanner.nextInt();
-
-        System.out.println();
-        System.out.println("Wat is uw geboortemaand? (in cijfers)");
-        System.out.println("GeboorteMaand: ");
-        int geboorteMaand = scanner.nextInt();
-
-        System.out.println();
-        System.out.println("Wat is uw geboortedag?");
-        System.out.println("Geboortedag: ");
-        int geboorteDag = scanner.nextInt();
 
 
-
-        System.out.println();
-        System.out.println("Welkom " + voornaam + " " + achternaam + ".");
+     /*   System.out.println();
+        System.out.println("Welkom " + voornaam + " " + achternaam + ".");*/
         System.out.println("Kies uw rol:");
         System.out.println("1) Beheerder");
         System.out.println("2) COA-medewerker");
@@ -59,6 +35,7 @@ public class Main {
 
         System.out.print("Uw rol is ");
         String rolnaam;
+
 
         if(rol == 1){
             rolnaam = "Beheerder";
