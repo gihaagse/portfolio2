@@ -3,12 +3,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Beheerder extends Gebruiker {
-    private boolean admin;
+    private boolean admin = true;
 
     public Beheerder(String naam, String achternaam, LocalDate geboortedatum, boolean admin){
         super(naam, achternaam, geboortedatum);
         this.admin = admin;
 
+    }
+
+    public Beheerder(){
     }
     public boolean isAdmin() {
         return admin;

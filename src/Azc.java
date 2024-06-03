@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Azc  {
+public class Azc implements Observer {
     private String naam;
     private String adres;
     private ArrayList<Asielzoeker> asielzoekers;

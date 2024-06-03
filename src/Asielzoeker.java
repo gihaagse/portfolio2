@@ -1,10 +1,11 @@
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class Asielzoeker extends Gebruiker {
+public class Asielzoeker extends Gebruiker implements Observer{
     private boolean asielzoeker;
     private String adres;
     private Land landVanHerkomst;
+    public Asielzoeker(){}
     public Asielzoeker(String naam, String achternaam, LocalDate geboortedatum, boolean asielzoeker){
         super(naam, achternaam, geboortedatum);
         this.asielzoeker = asielzoeker;
@@ -65,5 +66,9 @@ public class Asielzoeker extends Gebruiker {
         } else {
             Main.main(null);
         }
+    }
+    @Override
+    public void update(){
+        System.out.println("Het dossier is geüpdate");
     }
 }

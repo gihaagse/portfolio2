@@ -3,65 +3,84 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static ArrayList <Land> landen = new ArrayList<>();
+    private static final Scanner scanner = new Scanner(System.in);
+    public static ArrayList<Land> landen = new ArrayList<>();
+
     public static void main(String[] args) {
 
-        Land voorbeeldLand1 = new Land ("Nederland", true);
-        Land voorbeeldLand2 = new Land ("Afghanistan", false);
+        Land voorbeeldLand1 = new Land("Nederland", true);
+        Land voorbeeldLand2 = new Land("Afghanistan", false);
         landen.add(voorbeeldLand1);
         landen.add(voorbeeldLand2);
+
         Beheerder beheerder;
         CoaMedewerker coaMedewerker;
         Asielzoeker asielzoeker;
 
-/*        Beheerder beheerder1 = new Beheerder("test", "testt", LocalDate.of(2004, 6, 27), true);
-        beheerder1.veranderenVeiligheidLand();*/
-
-
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Welkom in het programma");
         System.out.println();
 
-
-     /*   System.out.println();
-        System.out.println("Welkom " + voornaam + " " + achternaam + ".");*/
         System.out.println("Kies uw rol:");
         System.out.println("1) Beheerder");
         System.out.println("2) COA-medewerker");
         System.out.println("3) Asielzoeker");
         int rol = KeuzeChecker.keuzeCheck(3);
-        //scanner.nextLine();
         System.out.println();
 
         System.out.print("Uw rol is ");
-        String rolnaam;
+        KeuzeChecker.printRol(rol);
+        System.out.println();
 
+        System.out.println("Wilt u een nieuwe gebruiker aanmaken voor deze rol of wilt u inloggen met een bestaand account?");
+        System.out.println("1) Nieuwe gebruiker aanmaken");
+        System.out.println("2) Inloggen met een bestaand account");
+        int inlogKeuze = KeuzeChecker.keuzeCheck(2);
 
-        if(rol == 1){
-            rolnaam = "Beheerder";
-            beheerder = new Beheerder(voornaam, achternaam, LocalDate.of(geboorteJaar, geboorteMaand, geboorteDag), true);
-            System.out.println(rolnaam);
-            System.out.println();
-            beheerder.actieUitvoeren();
+        if (inlogKeuze == 1) {
+            switch (rol) {
+                case 1:
+                    beheerder = new Beheerder();
+                    nieuweGebruikerMaken(beheerder);
+/*                    beheerder.setNaam(beheerder.vraagVoornaam());
+                    beheerder.setAchternaam(beheerder.vraagAchternaam());
+                    beheerder.setGeboortedatum(LocalDate.of(beheerder.vraagGeboorteJaar(), beheerder.vraagGeboorteMaand(), beheerder.vraagGeboorteDag()));
+*/                    beheerder.actieUitvoeren();
+                    break;
+
+                case 2:
+                    coaMedewerker = new CoaMedewerker();
+                    nieuweGebruikerMaken(coaMedewerker);
+/*                    coaMedewerker.setNaam(coaMedewerker.vraagVoornaam());
+                    coaMedewerker.setAchternaam(coaMedewerker.vraagAchternaam());
+                    coaMedewerker.setGeboortedatum(LocalDate.of(coaMedewerker.vraagGeboorteJaar(), coaMedewerker.vraagGeboorteMaand(), coaMedewerker.vraagGeboorteDag()));
+                  */  coaMedewerker.actieUitvoeren();
+                    break;
+
+                case 3:
+                    asielzoeker = new Asielzoeker();
+                    nieuweGebruikerMaken(asielzoeker);
+/*                    asielzoeker.setNaam(asielzoeker.vraagVoornaam());
+                    asielzoeker.setAchternaam(asielzoeker.vraagAchternaam());
+                  */  asielzoeker.setGeboortedatum(LocalDate.of(asielzoeker.vraagGeboorteJaar(), asielzoeker.vraagGeboorteMaand(), asielzoeker.vraagGeboorteDag()));
+                    break;
+
+                default:
+                    System.out.println("Geen rol");
+                    break;
+            }
         }
-        else if(rol == 2){
-            rolnaam = "COA-medewerker";
-            coaMedewerker = new CoaMedewerker(voornaam, achternaam, LocalDate.of(geboorteJaar, geboorteMaand, geboorteDag), true);
-            System.out.println(rolnaam);
-            System.out.println();
-            coaMedewerker.actieUitvoeren();
-        }
-        else if(rol ==3){
-            rolnaam = "Asielzoeker";
-            asielzoeker = new Asielzoeker(voornaam, achternaam, LocalDate.of(geboorteJaar, geboorteMaand, geboorteDag), true);
-            System.out.println(rolnaam);
-            System.out.println();
-            asielzoeker.actieUitvoeren();
-        }
+
 
 
 
     }
 
-
+    public static void nieuweGebruikerMaken(Gebruiker gebruiker){
+        gebruiker.setNaam(gebruiker.vraagVoornaam());
+        gebruiker.setAchternaam(gebruiker.vraagAchternaam());
+        gebruiker.setGeboortedatum(LocalDate.of(gebruiker.vraagGeboorteJaar(), gebruiker.vraagGeboorteMaand(), gebruiker.vraagGeboorteDag()));
+    }
 }
+
+
+

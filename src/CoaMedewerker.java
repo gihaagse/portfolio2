@@ -10,6 +10,8 @@ public class CoaMedewerker extends Gebruiker {
 
     }
 
+    public CoaMedewerker(){}
+
     public boolean isCoaMedewerker() {
         return coaMedewerker;
     }

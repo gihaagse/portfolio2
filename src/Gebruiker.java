@@ -14,38 +14,41 @@ public abstract class Gebruiker {
         this.geboortedatum = geboortedatum;
 
     }
-    public void vraagVoornaam() {
+
+    public Gebruiker(){}
+    public String vraagVoornaam() {
         System.out.println("Wat is uw voornaam?");
         System.out.println("voornaam: ");
-        String voornaam = scanner.nextLine();
+        return scanner.nextLine();
     }
 
-    public void vraagAchternaam() {
+    public String vraagAchternaam() {
         System.out.println();
         System.out.println("Wat is uw achternaam?");
         System.out.println("Achternaam: ");
-        String achternaam = scanner.nextLine();
+        return scanner.nextLine();
     }
 
-    public void vraagGeboorteJaar() {
+    public int vraagGeboorteJaar() {
         System.out.println();
         System.out.println("Wat is uw geboortejaar?");
         System.out.println("Geboortejaar: ");
-        int geboorteJaar = scanner.nextInt();
+        return KeuzeChecker.keuzeInRange(1900, LocalDate.now().getYear());
+
     }
 
-    public void vraagGeboorteMaand() {
+    public int vraagGeboorteMaand() {
         System.out.println();
         System.out.println("Wat is uw geboortemaand? (in cijfers)");
         System.out.println("GeboorteMaand: ");
-        int geboorteMaand = scanner.nextInt();
-    }
-    public void vraagGeboorteDag(){
+        return KeuzeChecker.keuzeInRange(1, 12); }
+
+    public int vraagGeboorteDag(){
 
         System.out.println();
         System.out.println("Wat is uw geboortedag?");
         System.out.println("Geboortedag: ");
-        int geboorteDag = scanner.nextInt();
+        return KeuzeChecker.keuzeInRange(1,31);
 
     }
 
