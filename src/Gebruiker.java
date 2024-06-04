@@ -16,6 +16,8 @@ public abstract class Gebruiker {
     }
 
     public Gebruiker(){}
+
+    public void actieUitvoeren(){};
     public String vraagVoornaam() {
         System.out.println("Wat is uw voornaam?");
         System.out.println("voornaam: ");

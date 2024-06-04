@@ -2,15 +2,16 @@ import java.util.Scanner;
 
 public class KeuzeChecker {
     private static final Scanner scanner = new Scanner(System.in);
-    public static int keuzeCheck (int max) {
+
+    public static int keuzeCheck(int max) {
         while (true) {
 
             if (scanner.hasNextInt()) {
                 int gekozenOptie = scanner.nextInt();
-                if (gekozenOptie <= max && gekozenOptie >= 1)  {
+                if (gekozenOptie <= max && gekozenOptie >= 1) {
                     return gekozenOptie;
                 } else {
-                    System.out.println("Selecteer alstublieft een geldig nummer (1 t/m " +max+ "):");
+                    System.out.println("Selecteer alstublieft een geldig nummer (1 t/m " + max + "):");
                 }
             } else {
                 System.out.println("Ongeldige invoer. Voer alstublieft een nummer in:");
@@ -18,6 +19,7 @@ public class KeuzeChecker {
             }
         }
     }
+
     public static int keuzeInRange(int min, int max) {
         int input;
 
@@ -27,7 +29,7 @@ public class KeuzeChecker {
             if (input >= min && input <= max) {
                 return input;
             } else {
-                System.out.println("Ongeldige invoer. Voer een warde in tussen " + min + " en " + max );
+                System.out.println("Ongeldige invoer. Voer een warde in tussen " + min + " en " + max);
             }
         }
     }
@@ -47,5 +49,14 @@ public class KeuzeChecker {
                 System.out.println("Geen rol");
                 break;
         }
+    }
+
+    public static void returnNaarHoofdmenu(int afloopKeuze, StdActies stdactie) {
+        if (afloopKeuze == 1) {
+            stdactie.actieUitvoeren();
+        } else {
+            Main.main(null);
+        }
+
     }
 }

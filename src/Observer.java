@@ -1,5 +1,7 @@
 public interface Observer {
 
-    Dossier dossier;
     public void update();
+
+    public void setDossier(Dossier dossier);
+
 }

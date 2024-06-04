@@ -41,33 +41,25 @@ public class Main {
                 case 1:
                     beheerder = new Beheerder();
                     nieuweGebruikerMaken(beheerder);
-/*                    beheerder.setNaam(beheerder.vraagVoornaam());
-                    beheerder.setAchternaam(beheerder.vraagAchternaam());
-                    beheerder.setGeboortedatum(LocalDate.of(beheerder.vraagGeboorteJaar(), beheerder.vraagGeboorteMaand(), beheerder.vraagGeboorteDag()));
-*/                    beheerder.actieUitvoeren();
                     break;
 
                 case 2:
                     coaMedewerker = new CoaMedewerker();
                     nieuweGebruikerMaken(coaMedewerker);
-/*                    coaMedewerker.setNaam(coaMedewerker.vraagVoornaam());
-                    coaMedewerker.setAchternaam(coaMedewerker.vraagAchternaam());
-                    coaMedewerker.setGeboortedatum(LocalDate.of(coaMedewerker.vraagGeboorteJaar(), coaMedewerker.vraagGeboorteMaand(), coaMedewerker.vraagGeboorteDag()));
-                  */  coaMedewerker.actieUitvoeren();
                     break;
 
                 case 3:
                     asielzoeker = new Asielzoeker();
                     nieuweGebruikerMaken(asielzoeker);
-/*                    asielzoeker.setNaam(asielzoeker.vraagVoornaam());
-                    asielzoeker.setAchternaam(asielzoeker.vraagAchternaam());
-                  */  asielzoeker.setGeboortedatum(LocalDate.of(asielzoeker.vraagGeboorteJaar(), asielzoeker.vraagGeboorteMaand(), asielzoeker.vraagGeboorteDag()));
                     break;
 
                 default:
                     System.out.println("Geen rol");
                     break;
             }
+        }
+        else{
+
         }
 
 
@@ -79,6 +71,7 @@ public class Main {
         gebruiker.setNaam(gebruiker.vraagVoornaam());
         gebruiker.setAchternaam(gebruiker.vraagAchternaam());
         gebruiker.setGeboortedatum(LocalDate.of(gebruiker.vraagGeboorteJaar(), gebruiker.vraagGeboorteMaand(), gebruiker.vraagGeboorteDag()));
+        gebruiker.actieUitvoeren();
     }
 }
 
