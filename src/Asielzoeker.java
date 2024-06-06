@@ -5,7 +5,6 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     private boolean asielzoeker;
     private String adres;
     private Land landVanHerkomst;
-
     private Dossier dossier;
 
 
@@ -45,7 +44,7 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
         System.out.println("1) Nieuw adres registreren");
         System.out.println("2) Status van dossier inzien");
 
-        int keuze = KeuzeChecker.keuzeCheck(1);
+        int keuze = KeuzeChecker.keuzeCheck(2);
 
         switch (keuze) {
             case 1:
@@ -53,6 +52,9 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
                 break;
             case 2:
                 opvragenStatusDossier();
+                break;
+            default:
+                System.out.println("Deze keuze is er niet");
                 break;
         }
 

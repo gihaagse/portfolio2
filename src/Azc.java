@@ -5,6 +5,8 @@ public class Azc implements Observer {
     private String adres;
     private ArrayList<Asielzoeker> asielzoekers;
 
+    public Dossier dossier;
+
     public String getNaam() {
         return naam;
     }
@@ -31,4 +33,13 @@ public class Azc implements Observer {
     void toevoegenAsielzoeker() {}
 
     void verwijderenAsielzoeker() {}
+
+    @Override
+    public void setDossier(Dossier dossier){
+        this.dossier = dossier;
+    }
+
+    @Override
+    public void update(Dossier dossier){
+    }
 }
