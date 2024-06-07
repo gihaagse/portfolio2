@@ -51,7 +51,11 @@ public class KeuzeChecker {
         }
     }
 
-    public static void returnNaarHoofdmenu(int afloopKeuze, StdActies stdactie) {
+    public static void returnNaarHoofdmenu(StdActies stdactie) {
+        System.out.println("Wilt u nog een actie uitvoeren of teruggaan naar het inlogscherm?");
+        System.out.println("1) Nog een actie uitvoeren");
+        System.out.println("2) Teruggaan naar het inlogscherm");
+        int afloopKeuze = keuzeCheck(2);
         if (afloopKeuze == 1) {
             stdactie.actieUitvoeren();
         } else {

@@ -1,2 +1,3 @@
-public enum Gender {man, vrouw, geen
+public enum Gender {
+    MAN, VROUW, GEEN
 }

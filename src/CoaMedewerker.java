@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class CoaMedewerker extends Gebruiker {
+public class CoaMedewerker extends Gebruiker implements StdActies{
     private boolean coaMedewerker;
 
     public CoaMedewerker(String naam, String achternaam, LocalDate geboortedatum, boolean coaMedewerker) {
@@ -47,7 +47,25 @@ public class CoaMedewerker extends Gebruiker {
 
     public void registrerenVluchteling() {
         System.out.println("U heeft gekozen voor het registreren van een vluchteling.");
-        System.out.println("Wat is de voornaam van de vluchteling die u wilt registreren?");
+        System.out.println("Voer alstublieft de volgende gegevens in van de vluchteling");
+        System.out.println();
+        Asielzoeker asielzoeker = new Asielzoeker();
+        MaakUsers.nieuweGebruikerMaken(asielzoeker);
+        Main.asielZoekers.add(asielzoeker);
+
+        System.out.println("Kan de betreffende asielzoeker een paspoort tonen?");
+        System.out.println("1) Ja");
+        System.out.println("2) Nee");
+        int keuze = KeuzeChecker.keuzeCheck(2);
+
+        switch (keuze){
+            case 1: InvullenDossier.invullenStandaardDossier(asielzoeker);
+                System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
+                Dossier dossier = asielzoeker.getDossier();
+                dossier.printAlleWaardes();
+        }
+
+        KeuzeChecker.returnNaarHoofdmenu(this);
     }
 
     void opvragenGemeente() {}

@@ -5,7 +5,10 @@ import java.util.Scanner;
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     public static ArrayList<Land> landen = new ArrayList<>();
-    public static ArrayList<Land> asielZoekers = new ArrayList<>();
+    public static ArrayList<Asielzoeker> asielZoekers = new ArrayList<>();
+    public static ArrayList<Asielzoeker> ter_Apel = new ArrayList<>();
+    public static ArrayList<CoaMedewerker> coaMedewerkers = new ArrayList<>();
+    public static ArrayList<Beheerder> beheerders = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -44,16 +47,19 @@ public class Main {
                 case 1:
                     beheerder = new Beheerder();
                     MaakUsers.nieuweGebruikerMaken(beheerder);
+                    beheerders.add(beheerder);
                     break;
 
                 case 2:
                     coaMedewerker = new CoaMedewerker();
                     MaakUsers.nieuweGebruikerMaken(coaMedewerker);
+                    coaMedewerkers.add(coaMedewerker);
                     break;
 
                 case 3:
                     asielzoeker = new Asielzoeker();
                     MaakUsers.nieuweGebruikerMaken(asielzoeker);
+                    asielZoekers.add(asielzoeker);
                     break;
 
                 default:

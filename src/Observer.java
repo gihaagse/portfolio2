@@ -6,6 +6,7 @@ public interface Observer {
 
     public void update();
 
+    public Dossier getDossier();
     public void setDossier(Dossier dossier);
 
 }

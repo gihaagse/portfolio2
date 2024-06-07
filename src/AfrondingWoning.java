@@ -1,2 +1,3 @@
-public enum AfrondingWoning {nee, afgerond
+public enum AfrondingWoning {
+    NEE, AFGEROND
 }

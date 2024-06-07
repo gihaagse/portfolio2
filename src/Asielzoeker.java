@@ -20,6 +20,12 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     public void setDossier(Dossier dossier){
         this.dossier = dossier;
     }
+
+    @Override
+    public Dossier getDossier() {
+        return dossier;
+    }
+
     public boolean isAsielzoeker() {
         return asielzoeker;
     }
@@ -64,10 +70,10 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     void gegevensOpvragen() {}
 
     void opvragenStatusDossier() {
-        System.out.println("Asielaanvraag is afgerond: " + dossier.isAfrondingAsiel());
-        System.out.println("Uitspraak IND: " + dossier.isUitspraakIND());
+        System.out.println("Asielaanvraag is afgerond:" + dossier.getAfrondingAsiel() );
+        System.out.println("Uitspraak IND: " + dossier.getUitspraakIND());
         System.out.println("Plaatsing in eigen woning: " + dossier.getEigenWoning());
-        System.out.println("Teruggekeerd naar het land van herkomst: " + dossier.isTerugNaarLand());
+        System.out.println("Teruggekeerd naar het land van herkomst: " + dossier.getTerugNaarLand());
     }
 
     void registrerenNieuwAdres() {
@@ -79,11 +85,7 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
         System.out.println();
         System.out.println("Uw nieuwe adres is: " + adres + ".");
 
-        System.out.println("Wilt u nog een actie uitvoeren of teruggaan naar het inlogscherm?");
-        System.out.println("1) Nog een actie uitvoeren");
-        System.out.println("2) Teruggaan naar het inlogscherm");
-        int afloopKeuze = KeuzeChecker.keuzeCheck(2);
-        KeuzeChecker.returnNaarHoofdmenu(afloopKeuze, this);
+        KeuzeChecker.returnNaarHoofdmenu(this);
 
     }
     @Override

@@ -1,25 +1,25 @@
 import java.util.List;
 
 public class Dossier {
-    private boolean afrondingAsiel;
-    private boolean uitspraakIND;
+    private AfrondingAsiel afrondingAsiel;
+    private UitspraakIND uitspraakIND;
     private AfrondingWoning eigenWoning;
-    private boolean terugNaarLand;
+    private TerugNaarLand terugNaarLand;
     private List<Observer> observers;
 
-    public boolean isAfrondingAsiel() {
+    public AfrondingAsiel getAfrondingAsiel() {
         return afrondingAsiel;
     }
 
-    public void setAfrondingAsiel(boolean afrondingAsiel) {
+    public void setAfrondingAsiel(AfrondingAsiel afrondingAsiel) {
         this.afrondingAsiel = afrondingAsiel;
     }
 
-    public boolean isUitspraakIND() {
+    public UitspraakIND getUitspraakIND() {
         return uitspraakIND;
     }
 
-    public void setUitspraakIND(boolean uitspraakIND) {
+    public void setUitspraakIND(UitspraakIND uitspraakIND) {
         this.uitspraakIND = uitspraakIND;
     }
 
@@ -31,11 +31,11 @@ public class Dossier {
         this.eigenWoning = eigenWoning;
     }
 
-    public boolean isTerugNaarLand() {
+    public TerugNaarLand getTerugNaarLand() {
         return terugNaarLand;
     }
 
-    public void setTerugNaarLand(boolean terugNaarLand) {
+    public void setTerugNaarLand(TerugNaarLand terugNaarLand) {
         this.terugNaarLand = terugNaarLand;
     }
 
@@ -45,6 +45,13 @@ public class Dossier {
 
     public void setObservers(List<Observer> observers) {
         this.observers = observers;
+    }
+
+    public void printAlleWaardes(){
+        System.out.println("Asielaanvraag is afgerond:" + getAfrondingAsiel() );
+        System.out.println("Uitspraak IND: " + getUitspraakIND());
+        System.out.println("Plaatsing in eigen woning: " + getEigenWoning());
+        System.out.println("Teruggekeerd naar het land van herkomst: " + getTerugNaarLand());
     }
 
 
