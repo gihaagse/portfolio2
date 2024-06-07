@@ -7,7 +7,6 @@ public class CoaMedewerker extends Gebruiker implements StdActies{
     public CoaMedewerker(String naam, String achternaam, LocalDate geboortedatum, boolean coaMedewerker) {
         super(naam, achternaam, geboortedatum);
         this.coaMedewerker = coaMedewerker;
-
     }
 
     public CoaMedewerker() {
@@ -59,10 +58,17 @@ public class CoaMedewerker extends Gebruiker implements StdActies{
         int keuze = KeuzeChecker.keuzeCheck(2);
 
         switch (keuze){
-            case 1: InvullenDossier.invullenStandaardDossier(asielzoeker);
+            case 1:
+                InvullenDossier.invullenStandaardDossier(asielzoeker);
                 System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
                 Dossier dossier = asielzoeker.getDossier();
                 dossier.printAlleWaardes();
+            case 2:
+                System.out.println("De asielzoeker kan geen paspoort tonen, dus het dossier kan niet worden aangemaakt");
+                break;
+            default:
+                System.out.println("Geen keuze");
+                break;
         }
 
         KeuzeChecker.returnNaarHoofdmenu(this);

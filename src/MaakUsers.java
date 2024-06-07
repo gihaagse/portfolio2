@@ -6,7 +6,5 @@ public class MaakUsers {
         gebruiker.setAchternaam(gebruiker.vraagAchternaam());
         gebruiker.setGender(gebruiker.vraagGender());
         gebruiker.setGeboortedatum(LocalDate.of(gebruiker.vraagGeboorteJaar(), gebruiker.vraagGeboorteMaand(), gebruiker.vraagGeboorteDag()));
-        gebruiker.actieUitvoeren();
-
     }
 }

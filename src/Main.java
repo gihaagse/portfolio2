@@ -48,18 +48,21 @@ public class Main {
                     beheerder = new Beheerder();
                     MaakUsers.nieuweGebruikerMaken(beheerder);
                     beheerders.add(beheerder);
+                    beheerder.actieUitvoeren();
                     break;
 
                 case 2:
                     coaMedewerker = new CoaMedewerker();
                     MaakUsers.nieuweGebruikerMaken(coaMedewerker);
                     coaMedewerkers.add(coaMedewerker);
+                    coaMedewerker.actieUitvoeren();
                     break;
 
                 case 3:
                     asielzoeker = new Asielzoeker();
                     MaakUsers.nieuweGebruikerMaken(asielzoeker);
                     asielZoekers.add(asielzoeker);
+                    asielzoeker.actieUitvoeren();
                     break;
 
                 default:
