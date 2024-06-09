@@ -5,14 +5,14 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     private boolean asielzoeker;
     private String adres;
     private Land landVanHerkomst;
-    private Dossier dossier;
+    private Dossier dossier = new Dossier();
+    private DossierEditor dossierEditor = new DossierEditor();
 
 
     public Asielzoeker(){}
     public Asielzoeker(String naam, String achternaam, LocalDate geboortedatum, boolean asielzoeker){
         super(naam, achternaam, geboortedatum);
         this.asielzoeker = asielzoeker;
-
     }
 
 
@@ -46,7 +46,6 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wat voor actie wilt u uitvoeren?");
 
-        System.out.println("(Voorlopig alleen deze optie)");
         System.out.println("1) Nieuw adres registreren");
         System.out.println("2) Status van dossier inzien");
 
@@ -70,10 +69,14 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     void gegevensOpvragen() {}
 
     void opvragenStatusDossier() {
-        System.out.println("Asielaanvraag is afgerond:" + dossier.getAfrondingAsiel() );
-        System.out.println("Uitspraak IND: " + dossier.getUitspraakIND());
-        System.out.println("Plaatsing in eigen woning: " + dossier.getEigenWoning());
-        System.out.println("Teruggekeerd naar het land van herkomst: " + dossier.getTerugNaarLand());
+        if (dossier == null) {
+            System.out.println("Het dossier is nog leeg");
+        }
+        else{
+            dossierEditor.UitlezenDossier(dossier);
+        }
+        KeuzeChecker.returnNaarHoofdmenu(this);
+
     }
 
     void registrerenNieuwAdres() {
@@ -92,8 +95,10 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     public void update(){
         System.out.println("Het dossier is geüpdate");
     }
-    public void main(String[] args) {
+    public static void main(String[] args) {
         Asielzoeker aslz = new Asielzoeker();
-        actieUitvoeren();
+        aslz.actieUitvoeren();
     }
+
+
 }

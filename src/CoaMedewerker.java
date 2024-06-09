@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class CoaMedewerker extends Gebruiker implements StdActies{
     private boolean coaMedewerker;
@@ -23,7 +22,6 @@ public class CoaMedewerker extends Gebruiker implements StdActies{
     public void actieUitvoeren() {
 
         System.out.println("Wat voor actie wilt u uitvoeren?");
-
         System.out.println("(Voorlopig alleen deze optie)");
         System.out.println("1) Vluchteling registreren");
 
@@ -48,9 +46,10 @@ public class CoaMedewerker extends Gebruiker implements StdActies{
         System.out.println("U heeft gekozen voor het registreren van een vluchteling.");
         System.out.println("Voer alstublieft de volgende gegevens in van de vluchteling");
         System.out.println();
+
         Asielzoeker asielzoeker = new Asielzoeker();
         MaakUsers.nieuweGebruikerMaken(asielzoeker);
-        Main.asielZoekers.add(asielzoeker);
+        Main.asielzoekers.add(asielzoeker);
 
         System.out.println("Kan de betreffende asielzoeker een paspoort tonen?");
         System.out.println("1) Ja");
@@ -59,7 +58,7 @@ public class CoaMedewerker extends Gebruiker implements StdActies{
 
         switch (keuze){
             case 1:
-                InvullenDossier.invullenStandaardDossier(asielzoeker);
+                DossierEditor.invullenStandaardArchief(asielzoeker, new Dossier());
                 System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
                 Dossier dossier = asielzoeker.getDossier();
                 dossier.printAlleWaardes();

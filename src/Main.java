@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     public static ArrayList<Land> landen = new ArrayList<>();
-    public static ArrayList<Asielzoeker> asielZoekers = new ArrayList<>();
-    public static ArrayList<Asielzoeker> ter_Apel = new ArrayList<>();
-    public static ArrayList<CoaMedewerker> coaMedewerkers = new ArrayList<>();
-    public static ArrayList<Beheerder> beheerders = new ArrayList<>();
+    public static ArrayList<Gebruiker> asielzoekers = new ArrayList<>();
+    public static ArrayList<Gebruiker> ter_Apel = new ArrayList<>();
+    public static ArrayList<Gebruiker> coaMedewerkers = new ArrayList<>();
+    public static ArrayList<Gebruiker> beheerders = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -18,6 +18,13 @@ public class Main {
         landen.add(voorbeeldLand1);
         landen.add(voorbeeldLand2);
         landen.add(voorbeeldLand3);
+
+        Asielzoeker voorbeeldAsielzoeker1 = new Asielzoeker("Tak", "Lak", LocalDate.of(1980, 8, 20), true);
+        Asielzoeker voorbeeldAsielzoeker2 = new Asielzoeker("Pita", "Zaki", LocalDate.of(1975, 4, 25), true);
+        Asielzoeker voorbeeldAsielzoeker3 = new Asielzoeker("Maki", "Zehn", LocalDate.of(1999, 3, 2), true);
+        asielzoekers.add(voorbeeldAsielzoeker1);
+        asielzoekers.add(voorbeeldAsielzoeker2);
+        asielzoekers.add(voorbeeldAsielzoeker3);
 
         Beheerder beheerder;
         CoaMedewerker coaMedewerker;
@@ -39,7 +46,7 @@ public class Main {
 
         System.out.println("Wilt u een nieuwe gebruiker aanmaken voor deze rol of wilt u inloggen met een bestaand account?");
         System.out.println("1) Nieuwe gebruiker aanmaken");
-        System.out.println("2) Inloggen met een bestaand account (Deze functie werkt niet)");
+        System.out.println("2) Inloggen met een bestaand account (Voor nu kiezen uit lijst)");
         int inlogKeuze = KeuzeChecker.keuzeCheck(2);
 
         if (inlogKeuze == 1) {
@@ -61,7 +68,7 @@ public class Main {
                 case 3:
                     asielzoeker = new Asielzoeker();
                     MaakUsers.nieuweGebruikerMaken(asielzoeker);
-                    asielZoekers.add(asielzoeker);
+                    asielzoekers.add(asielzoeker);
                     asielzoeker.actieUitvoeren();
                     break;
 
@@ -70,7 +77,26 @@ public class Main {
                     break;
             }
         }
+
         else{
+            System.out.println("Voer het nummer in van het account waarmee u wilt inloggen");
+            switch (rol){
+                case 1:
+                    KeuzeChecker.printLijstVanGebruikers(beheerders);
+                    KeuzeChecker.kiesGebruiker(beheerders);
+                    break;
+                case 2:
+                    KeuzeChecker.printLijstVanGebruikers(coaMedewerkers);
+                    KeuzeChecker.kiesGebruiker(coaMedewerkers);
+                    break;
+                case 3:
+                    KeuzeChecker.printLijstVanGebruikers(asielzoekers);
+                    KeuzeChecker.kiesGebruiker(asielzoekers);
+                    break;
+                default:
+                    System.out.println("Geen optie");
+                    break;
+            }
 
         }
 
@@ -78,6 +104,8 @@ public class Main {
 
 
     }
+
+
 
 
 }

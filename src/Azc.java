@@ -43,4 +43,9 @@ public class Azc implements Observer {
     public void update(){
         System.out.println("Het dossier is geüpdate");
     }
+
+    @Override
+    public Dossier getDossier() {
+        return dossier;
+    }
 }

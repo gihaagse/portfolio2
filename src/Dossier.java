@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Dossier {
+public class Dossier implements Archief{
     private AfrondingAsiel afrondingAsiel;
     private UitspraakIND uitspraakIND;
     private AfrondingWoning eigenWoning;
@@ -54,6 +54,11 @@ public class Dossier {
         System.out.println("Teruggekeerd naar het land van herkomst: " + getTerugNaarLand());
     }
 
-
+    public void invullenStandaardDossier(){
+        setAfrondingAsiel(AfrondingAsiel.NEE);
+        setUitspraakIND(UitspraakIND.NEE);
+        setEigenWoning(AfrondingWoning.NEE);
+        setTerugNaarLand(TerugNaarLand.NEE);
+    } 
 
 }

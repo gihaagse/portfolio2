@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class KeuzeChecker {
@@ -62,5 +63,18 @@ public class KeuzeChecker {
             Main.main(null);
         }
 
+    }
+
+    public static void printLijstVanGebruikers(ArrayList<Gebruiker> gebruiker){
+
+        for(int i = 1; i <= gebruiker.size(); i++){
+            System.out.println(i + ") " + gebruiker.get(i-1).getNaam() + " " + gebruiker.get(i-1).getAchternaam() );
+        }
+    }
+
+    public static void kiesGebruiker(ArrayList<Gebruiker> gebruiker){
+        int keuze = keuzeCheck(gebruiker.size()  );
+        System.out.println(keuze);
+        gebruiker.get(keuze-1).actieUitvoeren();
     }
 }
