@@ -1,3 +1,3 @@
 public enum AfrondingWoning {
-    NEE, AFGEROND
+    NEE, OPGESTART, AFGEROND
 }

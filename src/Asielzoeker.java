@@ -2,6 +2,8 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Asielzoeker extends Gebruiker implements Observer, StdActies{
+    private static final Scanner scanner = new Scanner(System.in);
+
     private boolean asielzoeker;
     private String adres;
     private Land landVanHerkomst;
@@ -73,27 +75,34 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
             System.out.println("Het dossier is nog leeg");
         }
         else{
-            dossierEditor.UitlezenDossier(dossier);
+            dossierEditor.uitlezenArchief(dossier);
         }
         KeuzeChecker.returnNaarHoofdmenu(this);
 
     }
 
     void registrerenNieuwAdres() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Wat is uw nieuwe adres?");
-        String nieuwAdres = scanner.nextLine();
-        this.adres = nieuwAdres;
 
-        System.out.println();
-        System.out.println("Uw nieuwe adres is: " + adres + ".");
+        if(getDossier().getEigenWoning() == AfrondingWoning.OPGESTART) {
+            System.out.println("Wat is uw nieuwe adres?");
+            String nieuwAdres = scanner.nextLine();
+            this.adres = nieuwAdres;
 
-        KeuzeChecker.returnNaarHoofdmenu(this);
+            System.out.println();
+            System.out.println("Uw nieuwe adres is: " + adres + ".");
 
+            getDossier().setEigenWoning(AfrondingWoning.AFGEROND);
+
+            KeuzeChecker.returnNaarHoofdmenu(this);
+        }
+        else {
+            System.out.println("De plaatsing in een eigen woning is nog niet opgestart, dus het nieuwe adres kan nog niet geregistreerd worden.");
+            KeuzeChecker.returnNaarHoofdmenu(this);
+        }
     }
     @Override
     public void update(){
-        System.out.println("Het dossier is geüpdate");
+        System.out.println(getNaam() + " " + getAchternaam() + ": Uw plaatsing in een eigen woning is opgestart.");
     }
     public static void main(String[] args) {
         Asielzoeker aslz = new Asielzoeker();

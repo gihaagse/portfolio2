@@ -69,6 +69,8 @@ public class Main {
                     asielzoeker = new Asielzoeker();
                     MaakUsers.nieuweGebruikerMaken(asielzoeker);
                     asielzoekers.add(asielzoeker);
+                    Dossier dossier = new Dossier();
+                    dossier.subscribeArchiefUpdates(asielzoeker);
                     asielzoeker.actieUitvoeren();
                     break;
 

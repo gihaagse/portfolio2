@@ -1,7 +1,9 @@
 import java.time.LocalDate;
 
-public class CoaMedewerker extends Gebruiker implements StdActies{
+public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
     private boolean coaMedewerker;
+    private DossierEditor dossierEditor;
+    private Asielzoeker asielzoeker;
 
     public CoaMedewerker(String naam, String achternaam, LocalDate geboortedatum, boolean coaMedewerker) {
         super(naam, achternaam, geboortedatum);
@@ -47,8 +49,10 @@ public class CoaMedewerker extends Gebruiker implements StdActies{
         System.out.println("Voer alstublieft de volgende gegevens in van de vluchteling");
         System.out.println();
 
-        Asielzoeker asielzoeker = new Asielzoeker();
+        asielzoeker = new Asielzoeker();
         MaakUsers.nieuweGebruikerMaken(asielzoeker);
+        Dossier dossier = new Dossier();
+        asielzoeker.setDossier(dossier);
         Main.asielzoekers.add(asielzoeker);
 
         System.out.println("Kan de betreffende asielzoeker een paspoort tonen?");
@@ -58,10 +62,10 @@ public class CoaMedewerker extends Gebruiker implements StdActies{
 
         switch (keuze){
             case 1:
-                DossierEditor.invullenStandaardArchief(asielzoeker, new Dossier());
+                DossierEditor.invullenStandaardArchief(dossier);
+                dossierEditor.subscribeArchiefUpdates(dossier, asielzoeker);
                 System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
-                Dossier dossier = asielzoeker.getDossier();
-                dossier.printAlleWaardes();
+                dossierEditor.uitlezenArchief(dossier);
             case 2:
                 System.out.println("De asielzoeker kan geen paspoort tonen, dus het dossier kan niet worden aangemaakt");
                 break;
@@ -71,6 +75,21 @@ public class CoaMedewerker extends Gebruiker implements StdActies{
         }
 
         KeuzeChecker.returnNaarHoofdmenu(this);
+    }
+
+    @Override
+    public void update() {
+        System.out.println("De plaatsing in een eigen woning van " + asielzoeker.getNaam() + " " + asielzoeker.getAchternaam() + "opgestart." );
+    }
+
+    @Override
+    public Dossier getDossier() {
+        return null;
+    }
+
+    @Override
+    public void setDossier(Dossier dossier) {
+
     }
 
     void opvragenGemeente() {}
