@@ -29,8 +29,10 @@ public class Dossier implements Archief{
 
     public void setEigenWoning(AfrondingWoning eigenWoning) {
         this.eigenWoning = eigenWoning;
-        for(Observer obs: observers){
-            obs.update();
+        if (eigenWoning == AfrondingWoning.OPGESTART) {
+            for (Observer obs : observers) {
+                obs.update();
+            }
         }
     }
 

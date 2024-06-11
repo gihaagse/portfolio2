@@ -52,7 +52,7 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
         asielzoeker = new Asielzoeker();
         MaakUsers.nieuweGebruikerMaken(asielzoeker);
         Dossier dossier = new Dossier();
-        asielzoeker.setDossier(dossier);
+        asielzoeker.setArchief(dossier);
         Main.asielzoekers.add(asielzoeker);
 
         System.out.println("Kan de betreffende asielzoeker een paspoort tonen?");
@@ -83,12 +83,12 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
     }
 
     @Override
-    public Dossier getDossier() {
+    public Dossier getArchief() {
         return null;
     }
 
     @Override
-    public void setDossier(Dossier dossier) {
+    public void setArchief(Archief archief) {
 
     }
 

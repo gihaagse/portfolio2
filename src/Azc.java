@@ -5,7 +5,7 @@ public class Azc implements Observer {
     private String adres;
     private ArrayList<Asielzoeker> asielzoekers;
 
-    public Dossier dossier;
+    public Archief archief;
 
     public String getNaam() {
         return naam;
@@ -14,6 +14,7 @@ public class Azc implements Observer {
     public void setNaam(String naam) {
         this.naam = naam;
     }
+
     public String getAdres() {
         return adres;
     }
@@ -30,22 +31,26 @@ public class Azc implements Observer {
         asielzoekers.add(asielzoeker);
     }
 
-    void toevoegenAsielzoeker() {}
+    void toevoegenAsielzoeker() {
+    }
 
-    void verwijderenAsielzoeker() {}
+    void verwijderenAsielzoeker() {
+    }
+
 
     @Override
-    public void setDossier(Dossier dossier){
-        this.dossier = dossier;
+    public void setArchief(Archief archief) {
+        this.archief = archief;
     }
 
     @Override
-    public void update(){
+    public void update() {
         System.out.println("Het dossier is geüpdate");
     }
 
     @Override
-    public Dossier getDossier() {
-        return dossier;
+    public Archief getArchief() {
+        return archief;
     }
+
 }

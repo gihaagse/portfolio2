@@ -7,7 +7,7 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     private boolean asielzoeker;
     private String adres;
     private Land landVanHerkomst;
-    private Dossier dossier = new Dossier();
+    private Archief archief;
     private DossierEditor dossierEditor = new DossierEditor();
 
 
@@ -18,14 +18,13 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     }
 
 
-    @Override
-    public void setDossier(Dossier dossier){
-        this.dossier = dossier;
+    public void setArchief(Archief archief){
+        this.archief = this.archief;
     }
 
     @Override
-    public Dossier getDossier() {
-        return dossier;
+    public Archief getArchief() {
+        return archief;
     }
 
     public boolean isAsielzoeker() {
@@ -71,11 +70,11 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     void gegevensOpvragen() {}
 
     void opvragenStatusDossier() {
-        if (dossier == null) {
+        if (archief == null) {
             System.out.println("Het dossier is nog leeg");
         }
         else{
-            dossierEditor.uitlezenArchief(dossier);
+            dossierEditor.uitlezenArchief(archief);
         }
         KeuzeChecker.returnNaarHoofdmenu(this);
 
@@ -83,7 +82,7 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
 
     void registrerenNieuwAdres() {
 
-        if(getDossier().getEigenWoning() == AfrondingWoning.OPGESTART) {
+        if(getArchief().getEigenWoning() == AfrondingWoning.OPGESTART) {
             System.out.println("Wat is uw nieuwe adres?");
             String nieuwAdres = scanner.nextLine();
             this.adres = nieuwAdres;
@@ -91,7 +90,7 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
             System.out.println();
             System.out.println("Uw nieuwe adres is: " + adres + ".");
 
-            getDossier().setEigenWoning(AfrondingWoning.AFGEROND);
+            getArchief().setEigenWoning(AfrondingWoning.AFGEROND);
 
             KeuzeChecker.returnNaarHoofdmenu(this);
         }

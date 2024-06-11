@@ -15,4 +15,8 @@ public class DossierEditor {
     public void unsubscribeArchiefUpdates (Archief archief, Observer observer){
         archief.unsubscribeArchiefUpdates(observer);
     }
+
+    public static void setArchief(Archief archief, Observer observer){
+        observer.setArchief(archief);
+    }
 }
