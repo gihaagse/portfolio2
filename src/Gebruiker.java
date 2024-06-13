@@ -107,4 +107,6 @@ public abstract class Gebruiker {
         this.gender = gender;
     }
 
+    void opvragenStatusDossier(){};
+
 }

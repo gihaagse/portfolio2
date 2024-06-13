@@ -2,7 +2,7 @@ import java.time.LocalDate;
 
 public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
     private boolean coaMedewerker;
-    private DossierEditor dossierEditor;
+    private DossierEditor dossierEditor = new DossierEditor();
     private Asielzoeker asielzoeker;
 
     public CoaMedewerker(String naam, String achternaam, LocalDate geboortedatum, boolean coaMedewerker) {
@@ -24,14 +24,17 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
     public void actieUitvoeren() {
 
         System.out.println("Wat voor actie wilt u uitvoeren?");
-        System.out.println("(Voorlopig alleen deze optie)");
         System.out.println("1) Vluchteling registreren");
+        System.out.println("2) Dossier aanpassen (simpele functie)");
 
-        int keuze = KeuzeChecker.keuzeCheck(1);
+        int keuze = KeuzeChecker.keuzeCheck(2);
 
         switch (keuze) {
             case 1:
                 registrerenVluchteling();
+                break;
+            case 2:
+                bijwerkenDossier();
                 break;
             default:
                 System.out.println("Deze keuze is er niet");;
@@ -51,8 +54,8 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
 
         asielzoeker = new Asielzoeker();
         MaakUsers.nieuweGebruikerMaken(asielzoeker);
-        Dossier dossier = new Dossier();
-        asielzoeker.setArchief(dossier);
+        Archief archief = new Dossier();
+        asielzoeker.setArchief(archief);
         Main.asielzoekers.add(asielzoeker);
 
         System.out.println("Kan de betreffende asielzoeker een paspoort tonen?");
@@ -62,10 +65,10 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
 
         switch (keuze){
             case 1:
-                DossierEditor.invullenStandaardArchief(dossier);
-                dossierEditor.subscribeArchiefUpdates(dossier, asielzoeker);
+                DossierEditor.invullenStandaardArchief(archief);
+                dossierEditor.subscribeArchiefUpdates(archief, asielzoeker);
                 System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
-                dossierEditor.uitlezenArchief(dossier);
+                dossierEditor.uitlezenArchief(archief);
             case 2:
                 System.out.println("De asielzoeker kan geen paspoort tonen, dus het dossier kan niet worden aangemaakt");
                 break;
@@ -94,5 +97,31 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
 
     void opvragenGemeente() {}
 
-    void bijwerkenDossier() {}
+    void bijwerkenDossier() {
+        System.out.println("U heeft gekozen voor het aanpassen van een dossier.");
+        System.out.println("Welk dossier wilt u aanpassen?");
+        KeuzeChecker.printLijstVanGebruikers(Main.asielzoekers);
+        int keuze = KeuzeChecker.keuzeCheck(Main.asielzoekers.size()) - 1;
+
+        System.out.println();
+        System.out.println("Dit is het huidige dossier van " + Main.asielzoekers.get(keuze).getNaam() + " " + Main.asielzoekers.get(keuze).getAchternaam() + ": ");
+        Main.asielzoekers.get(keuze).opvragenStatusDossier();
+
+        System.out.println();
+        System.out.println("Welk detail wilt u veranderen?");
+        System.out.println("1) Asiel afronding");
+        System.out.println("2) Uitspraak IND");
+        System.out.println("3)Plaatsing in eigen woning");
+        System.out.println("4) Terrugkering naar land van herkomst");
+
+        int detailKeuze = KeuzeChecker.keuzeCheck(4);
+
+        switch (detailKeuze){
+            case 1:
+                System.out.println("Waar wilt u het naar veranderen?");
+                System.out.println(AfrondingAsiel.NEE);
+
+        }
+
+    }
 }

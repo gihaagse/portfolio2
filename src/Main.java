@@ -9,8 +9,7 @@ public class Main {
     public static ArrayList<Gebruiker> ter_Apel = new ArrayList<>();
     public static ArrayList<Gebruiker> coaMedewerkers = new ArrayList<>();
     public static ArrayList<Gebruiker> beheerders = new ArrayList<>();
-    private static Archief archief = new Dossier() {
-    };
+
 
     public static void main(String[] args) {
 
@@ -70,6 +69,7 @@ public class Main {
                 case 3:
                     asielzoeker = new Asielzoeker();
                     MaakUsers.nieuweGebruikerMaken(asielzoeker);
+                    Archief archief = new Dossier();
                     DossierEditor.setArchief(archief, asielzoeker);
                     asielzoekers.add(asielzoeker);
                     archief.subscribeArchiefUpdates(asielzoeker);

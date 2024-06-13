@@ -19,7 +19,7 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
 
 
     public void setArchief(Archief archief){
-        this.archief = this.archief;
+        this.archief = archief;
     }
 
     @Override
@@ -44,7 +44,6 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     }
     @Override
     public void actieUitvoeren() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Wat voor actie wilt u uitvoeren?");
 
         System.out.println("1) Nieuw adres registreren");
@@ -69,6 +68,7 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
 
     void gegevensOpvragen() {}
 
+    @Override
     void opvragenStatusDossier() {
         if (archief == null) {
             System.out.println("Het dossier is nog leeg");

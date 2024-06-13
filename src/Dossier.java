@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Dossier implements Archief{
@@ -5,7 +6,7 @@ public class Dossier implements Archief{
     private UitspraakIND uitspraakIND;
     private AfrondingWoning eigenWoning;
     private TerugNaarLand terugNaarLand;
-    private List<Observer> observers;
+    private List<Observer> observers = new ArrayList<>();
 
     public AfrondingAsiel getAfrondingAsiel() {
         return afrondingAsiel;
