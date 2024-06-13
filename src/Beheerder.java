@@ -155,7 +155,4 @@ public class Beheerder extends Gebruiker {
         }
     }
 
-    void beherenAZC() {}
-
-    void rapportageOpvragen() {}
 }

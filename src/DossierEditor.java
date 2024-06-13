@@ -1,7 +1,7 @@
 public class DossierEditor {
 
-    public static void invullenStandaardArchief(Archief archief){
-        archief.invullenStandaardArchief();
+    public static void invullenStandaardArchief(Archief archief, Gebruiker asielzoeker){
+        archief.invullenStandaardArchief(asielzoeker);
     }
 
     public void uitlezenArchief(Archief archief){
@@ -19,4 +19,18 @@ public class DossierEditor {
     public static void setArchief(Archief archief, Observer observer){
         observer.setArchief(archief);
     }
+
+    public static void setAfrondingAsiel(Archief archief, AfrondingAsiel afrondingAsiel){
+        archief.setAfrondingAsiel(afrondingAsiel);
+    }
+    public static void setUitspraakIND(Archief archief, UitspraakIND uitspraakIND){
+        archief.setUitspraakIND(uitspraakIND);
+    }
+    public static void setEigenWoning(Archief archief, AfrondingWoning afrondingWoning, Gebruiker asielzoeker){
+        archief.setEigenWoning(afrondingWoning, asielzoeker);
+    }
+    public static void setTerugNaarLand(Archief archief, TerugNaarLand terugNaarLand){
+        archief.setTerugNaarLand(terugNaarLand);
+    }
+
 }

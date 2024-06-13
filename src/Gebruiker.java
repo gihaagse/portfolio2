@@ -109,4 +109,8 @@ public abstract class Gebruiker {
 
     void opvragenStatusDossier(){};
 
+    Archief getArchief(){
+        return null;
+    }
+
 }

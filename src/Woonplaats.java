@@ -1,9 +1,15 @@
-public class Adres {
+public class Woonplaats {
     private String adres;
 
     private String stad;
 
     private String postcode;
+    
+    public Woonplaats (String adres, String stad, String postcode){
+        this.adres = adres;
+        this.stad = stad;
+        this.postcode = postcode;
+    }
 
     public String getAdres(){
         return adres;
@@ -26,4 +32,5 @@ public class Adres {
     public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
+
 }

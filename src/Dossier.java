@@ -28,11 +28,15 @@ public class Dossier implements Archief{
         return eigenWoning;
     }
 
-    public void setEigenWoning(AfrondingWoning eigenWoning) {
+    public void setEigenWoning(AfrondingWoning eigenWoning, Gebruiker asielzoeker) {
         this.eigenWoning = eigenWoning;
         if (eigenWoning == AfrondingWoning.OPGESTART) {
-            for (Observer obs : observers) {
-                obs.update();
+            for (Observer obs: observers) {
+                obs.updateWoningOpgestart(asielzoeker);
+            }
+        } else if (eigenWoning == AfrondingWoning.AFGEROND) {
+            for (Observer obs: observers) {
+                obs.updateWoningOpgestart(asielzoeker);
             }
         }
     }
@@ -52,7 +56,7 @@ public class Dossier implements Archief{
     public void setObservers(List<Observer> observers) {
         this.observers = observers;
     }
-@Override
+    @Override
     public void uitlezenArchief(){
     if (getAfrondingAsiel() == null) {
         System.out.println("Asielaanvraag is niet ingevuld.");
@@ -74,17 +78,13 @@ public class Dossier implements Archief{
     } else {
         System.out.println("Teruggekeerd naar het land van herkomst: " + getTerugNaarLand());
     }
-        
-        /*        System.out.println("Asielaanvraag is afgerond:" + getAfrondingAsiel() );
-        System.out.println("Uitspraak IND: " + getUitspraakIND());
-        System.out.println("Plaatsing in eigen woning: " + getEigenWoning());
-        System.out.println("Teruggekeerd naar het land van herkomst: " + getTerugNaarLand());*/
+
     }
-@Override
-    public void invullenStandaardArchief(){
+    @Override
+    public void invullenStandaardArchief(Gebruiker asielzoeker){
         setAfrondingAsiel(AfrondingAsiel.NEE);
         setUitspraakIND(UitspraakIND.NEE);
-        setEigenWoning(AfrondingWoning.NEE);
+        setEigenWoning(AfrondingWoning.NEE, asielzoeker);
         setTerugNaarLand(TerugNaarLand.NEE);
     }
 

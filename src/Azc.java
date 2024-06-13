@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Azc implements Observer {
     private String naam;
-    private String adres;
+    private Woonplaats adres;
     private ArrayList<Asielzoeker> asielzoekers;
 
     public Archief archief;
@@ -15,11 +15,11 @@ public class Azc implements Observer {
         this.naam = naam;
     }
 
-    public String getAdres() {
+    public Woonplaats getAdres() {
         return adres;
     }
 
-    public void setAdres(String adres) {
+public void setAdres(Woonplaats adres) {
         this.adres = adres;
     }
 
@@ -44,10 +44,17 @@ public class Azc implements Observer {
     }
 
     @Override
-    public void update() {
-        System.out.println("Het dossier is geüpdate");
+    public void updateWoningOpgestart(Gebruiker asielzoeker) {
+        System.out.println("UPDATE MELDING (AZC): ");
+        System.out.println("De plaatsing in een eigen woning van " + asielzoeker.getNaam() + " " + asielzoeker.getAchternaam() + " is opgestart." );
     }
 
+    @Override
+    public void updateWoningAfgerond(Gebruiker asielzoeker) {
+        System.out.println("UPDATE MELDING (AZC): ");
+        System.out.println("De plaatsing in een eigen woning van " + asielzoeker.getNaam() + " " + asielzoeker.getAchternaam() + " is afgerond.");
+
+    }
     @Override
     public Archief getArchief() {
         return archief;

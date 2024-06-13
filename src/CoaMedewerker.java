@@ -25,7 +25,8 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
 
         System.out.println("Wat voor actie wilt u uitvoeren?");
         System.out.println("1) Vluchteling registreren");
-        System.out.println("2) Dossier aanpassen (simpele functie)");
+        System.out.println("2) Dossier aanpassen (niet de volledige user story, alleen simpele aanpassingen om udpates vanaf het dossier aan te tonen)");
+        System.out.println();
 
         int keuze = KeuzeChecker.keuzeCheck(2);
 
@@ -40,6 +41,9 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
                 System.out.println("Deze keuze is er niet");;
                 break;
         }
+
+        KeuzeChecker.returnNaarHoofdmenu(this);
+
 
 
     }
@@ -65,11 +69,14 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
 
         switch (keuze){
             case 1:
-                DossierEditor.invullenStandaardArchief(archief);
+                DossierEditor.invullenStandaardArchief(archief, asielzoeker);
                 dossierEditor.subscribeArchiefUpdates(archief, asielzoeker);
+                System.out.println();
                 System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
                 dossierEditor.uitlezenArchief(archief);
+                break;
             case 2:
+                System.out.println();
                 System.out.println("De asielzoeker kan geen paspoort tonen, dus het dossier kan niet worden aangemaakt");
                 break;
             default:
@@ -77,12 +84,21 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
                 break;
         }
 
-        KeuzeChecker.returnNaarHoofdmenu(this);
     }
 
     @Override
-    public void update() {
-        System.out.println("De plaatsing in een eigen woning van " + asielzoeker.getNaam() + " " + asielzoeker.getAchternaam() + "opgestart." );
+    public void updateWoningOpgestart(Gebruiker asielzoeker) {
+        System.out.println();
+        System.out.println("UPDATE MELDING (Coa Medewerker): ");
+        System.out.println("De plaatsing in een eigen woning van " + asielzoeker.getNaam() + " " + asielzoeker.getAchternaam() + " is opgestart." );
+    }
+
+    @Override
+    public void updateWoningAfgerond(Gebruiker asielzoeker) {
+        System.out.println();
+        System.out.println("UPDATE MELDING (Coa Medewerker): ");
+        System.out.println("De plaatsing in een eigen woning van " + asielzoeker.getNaam() + " " + asielzoeker.getAchternaam() + " is afgerond.");
+
     }
 
     @Override
@@ -100,28 +116,118 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
     void bijwerkenDossier() {
         System.out.println("U heeft gekozen voor het aanpassen van een dossier.");
         System.out.println("Welk dossier wilt u aanpassen?");
+        System.out.println();
         KeuzeChecker.printLijstVanGebruikers(Main.asielzoekers);
-        int keuze = KeuzeChecker.keuzeCheck(Main.asielzoekers.size()) - 1;
+        int keuze = KeuzeChecker.keuzeCheck(Main.asielzoekers.size());
+        Gebruiker gekozenAsielzoeker = Main.asielzoekers.get(keuze-1);
+
+
+        Archief archief = gekozenAsielzoeker.getArchief();
 
         System.out.println();
-        System.out.println("Dit is het huidige dossier van " + Main.asielzoekers.get(keuze).getNaam() + " " + Main.asielzoekers.get(keuze).getAchternaam() + ": ");
-        Main.asielzoekers.get(keuze).opvragenStatusDossier();
+        System.out.println("Dit is het huidige dossier van " + gekozenAsielzoeker.getNaam() + " " + gekozenAsielzoeker.getAchternaam() + ": ");
+        gekozenAsielzoeker.opvragenStatusDossier();
 
         System.out.println();
         System.out.println("Welk detail wilt u veranderen?");
         System.out.println("1) Asiel afronding");
         System.out.println("2) Uitspraak IND");
-        System.out.println("3)Plaatsing in eigen woning");
+        System.out.println("3) Plaatsing in eigen woning");
         System.out.println("4) Terrugkering naar land van herkomst");
+        System.out.println();
 
         int detailKeuze = KeuzeChecker.keuzeCheck(4);
 
+        System.out.println("Waar wilt u het naar veranderen?");
+
         switch (detailKeuze){
             case 1:
-                System.out.println("Waar wilt u het naar veranderen?");
-                System.out.println(AfrondingAsiel.NEE);
+                System.out.println("1) " + AfrondingAsiel.JA);
+                System.out.println("2) " + AfrondingAsiel.NEE);
+
+                int asielKeuze = KeuzeChecker.keuzeCheck(2);
+                    switch (asielKeuze){
+                        case 1:
+                            DossierEditor.setAfrondingAsiel(archief, AfrondingAsiel.JA);
+                        break;
+                        case 2:
+                            DossierEditor.setAfrondingAsiel(archief, AfrondingAsiel.NEE);
+                        break;
+                        default:
+                            System.out.println();
+                            System.out.println("Deze optie is er niet");
+                            break;
+                    }
+
+                break;
+            case 2:
+                System.out.println("1) " + UitspraakIND.JA);
+                System.out.println("2) " + UitspraakIND.NEE);
+                int indUitspraakKeuze = KeuzeChecker.keuzeCheck(2);
+                switch (indUitspraakKeuze){
+                    case 1:
+                        DossierEditor.setUitspraakIND(archief, UitspraakIND.JA);
+                        break;
+                    case 2:
+                        DossierEditor.setUitspraakIND(archief, UitspraakIND.NEE);
+                        break;
+                    default:
+                        System.out.println();
+                        System.out.println("Deze optie is er niet");
+                        break;
+                }
+                break;
+            case 3:
+                System.out.println("1) " + AfrondingWoning.AFGEROND);
+                System.out.println("2) " + AfrondingWoning.OPGESTART);
+                System.out.println("3) " + AfrondingWoning.NEE);
+                int afrondingWoningKeuze = KeuzeChecker.keuzeCheck(3);
+                switch (afrondingWoningKeuze){
+                    case 1:
+                        DossierEditor.setEigenWoning(archief, AfrondingWoning.AFGEROND, asielzoeker);
+                        break;
+                    case 2:
+                        DossierEditor.setEigenWoning(archief, AfrondingWoning.OPGESTART, asielzoeker);
+                        break;
+                    case 3:
+                        DossierEditor.setEigenWoning(archief, AfrondingWoning.NEE, asielzoeker);
+                        break;
+                    default:
+                        System.out.println();
+                        System.out.println("Deze optie is er niet");
+                        break;
+                }
+                break;
+            case 4:
+                System.out.println("1) " + TerugNaarLand.JA);
+                System.out.println("2) " + TerugNaarLand.NEE);
+                int terugNaarLandKeuze = KeuzeChecker.keuzeCheck(2);
+                switch (terugNaarLandKeuze){
+                    case 1:
+                        DossierEditor.setTerugNaarLand(archief, TerugNaarLand.JA);
+                        break;
+                    case 2:
+                        DossierEditor.setTerugNaarLand(archief, TerugNaarLand.NEE);
+                        break;
+                    default:
+                        System.out.println();
+                        System.out.println("Deze optie is er niet");
+                        break;
+                }
+                break;
+            default:
+                System.out.println();
+                System.out.println("Deze optie is er niet");
+                break;
 
         }
 
     }
+
+
+    public static void main(String[] args) {
+        CoaMedewerker coaMed = new CoaMedewerker();
+        coaMed.actieUitvoeren();
+    }
+
 }

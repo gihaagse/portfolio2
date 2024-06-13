@@ -1,5 +1,5 @@
 public interface Archief {
-    void invullenStandaardArchief();
+    void invullenStandaardArchief(Gebruiker asielzoeker);
     void uitlezenArchief();
     void subscribeArchiefUpdates(Observer observer);
     void unsubscribeArchiefUpdates(Observer observer);
@@ -16,7 +16,7 @@ public interface Archief {
 
 
     public AfrondingWoning getEigenWoning();
-    public void setEigenWoning(AfrondingWoning eigenWoning);
+    public void setEigenWoning(AfrondingWoning eigenWoning, Gebruiker asielzoeker);
 
     public TerugNaarLand getTerugNaarLand();
 

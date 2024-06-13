@@ -1,31 +1,23 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
-    private static final Scanner scanner = new Scanner(System.in);
     public static ArrayList<Land> landen = new ArrayList<>();
     public static ArrayList<Gebruiker> asielzoekers = new ArrayList<>();
     public static ArrayList<Gebruiker> ter_Apel = new ArrayList<>();
     public static ArrayList<Gebruiker> coaMedewerkers = new ArrayList<>();
     public static ArrayList<Gebruiker> beheerders = new ArrayList<>();
 
+    private static Boolean eersteKeer = true;
+
 
     public static void main(String[] args) {
 
-        Land voorbeeldLand1 = new Land("Nederland", true);
-        Land voorbeeldLand2 = new Land("Afghanistan", false);
-        Land voorbeeldLand3 = new Land("Oekraïne", false);
-        landen.add(voorbeeldLand1);
-        landen.add(voorbeeldLand2);
-        landen.add(voorbeeldLand3);
+        if(eersteKeer) {
+            maakVoorbeelden();
+            eersteKeer = false;
+        }
 
-        Asielzoeker voorbeeldAsielzoeker1 = new Asielzoeker("Tak", "Lak", LocalDate.of(1980, 8, 20), true);
-        Asielzoeker voorbeeldAsielzoeker2 = new Asielzoeker("Pita", "Zaki", LocalDate.of(1975, 4, 25), true);
-        Asielzoeker voorbeeldAsielzoeker3 = new Asielzoeker("Maki", "Zehn", LocalDate.of(1999, 3, 2), true);
-        asielzoekers.add(voorbeeldAsielzoeker1);
-        asielzoekers.add(voorbeeldAsielzoeker2);
-        asielzoekers.add(voorbeeldAsielzoeker3);
 
         Beheerder beheerder;
         CoaMedewerker coaMedewerker;
@@ -108,9 +100,24 @@ public class Main {
 
 
     }
+    public static void maakVoorbeelden(){
+        Land voorbeeldLand1 = new Land("Nederland", true);
+        Land voorbeeldLand2 = new Land("Afghanistan", false);
+        Land voorbeeldLand3 = new Land("Oekraïne", false);
+        landen.add(voorbeeldLand1);
+        landen.add(voorbeeldLand2);
+        landen.add(voorbeeldLand3);
 
+        Asielzoeker voorbeeldAsielzoeker1 = new Asielzoeker("Tak", "Lak", LocalDate.of(1980, 8, 20), true);
+        Asielzoeker voorbeeldAsielzoeker2 = new Asielzoeker("Pita", "Zaki", LocalDate.of(1975, 4, 25), true);
+        Asielzoeker voorbeeldAsielzoeker3 = new Asielzoeker("Maki", "Zehn", LocalDate.of(1999, 3, 2), true);
+        asielzoekers.add(voorbeeldAsielzoeker1);
+        asielzoekers.add(voorbeeldAsielzoeker2);
+        asielzoekers.add(voorbeeldAsielzoeker3);
 
-
+        CoaMedewerker voorbeeldCoaMedewerker1 = new CoaMedewerker("Coa", "Lita", LocalDate.of(1984, 7, 21), true);
+        coaMedewerkers.add(voorbeeldCoaMedewerker1);
+    }
 
 }
 

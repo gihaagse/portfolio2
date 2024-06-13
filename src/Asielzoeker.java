@@ -5,7 +5,7 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     private static final Scanner scanner = new Scanner(System.in);
 
     private boolean asielzoeker;
-    private String adres;
+    private Woonplaats adres;
     private Land landVanHerkomst;
     private Archief archief;
     private DossierEditor dossierEditor = new DossierEditor();
@@ -35,6 +35,14 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
         this.asielzoeker = asielzoeker;
     }
 
+    public Woonplaats getAdres(){
+        return this.adres;
+    }
+
+    public void setAdres(Woonplaats adres){
+        this.adres = adres;
+    }
+
     public Land getLandVanHerkomst() {
         return landVanHerkomst;
     }
@@ -45,9 +53,9 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     @Override
     public void actieUitvoeren() {
         System.out.println("Wat voor actie wilt u uitvoeren?");
-
         System.out.println("1) Nieuw adres registreren");
         System.out.println("2) Status van dossier inzien");
+        System.out.println();
 
         int keuze = KeuzeChecker.keuzeCheck(2);
 
@@ -63,6 +71,9 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
                 break;
         }
 
+        KeuzeChecker.returnNaarHoofdmenu(this);
+
+
     }
 
 
@@ -76,33 +87,52 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
         else{
             dossierEditor.uitlezenArchief(archief);
         }
-        KeuzeChecker.returnNaarHoofdmenu(this);
 
     }
 
     void registrerenNieuwAdres() {
 
         if(getArchief().getEigenWoning() == AfrondingWoning.OPGESTART) {
+            System.out.println("Het proces van de plaatsing in een eigen woning is opgestart, dus u kunt het nieuwe adres registreren.");
             System.out.println("Wat is uw nieuwe adres?");
             String nieuwAdres = scanner.nextLine();
-            this.adres = nieuwAdres;
+            System.out.println();
+
+            System.out.println("In welke stad ligt dat?");
+            String stad = scanner.nextLine();
+            System.out.println();
+
+            System.out.println("Wat is de postcode?");
+            String postcode = scanner.nextLine();
+            System.out.println();
+
+            setAdres(new Woonplaats(nieuwAdres, stad, postcode));
 
             System.out.println();
             System.out.println("Uw nieuwe adres is: " + adres + ".");
 
-            getArchief().setEigenWoning(AfrondingWoning.AFGEROND);
+            getArchief().setEigenWoning(AfrondingWoning.AFGEROND, this);
 
-            KeuzeChecker.returnNaarHoofdmenu(this);
         }
         else {
+            System.out.println();
             System.out.println("De plaatsing in een eigen woning is nog niet opgestart, dus het nieuwe adres kan nog niet geregistreerd worden.");
-            KeuzeChecker.returnNaarHoofdmenu(this);
         }
     }
     @Override
-    public void update(){
+    public void updateWoningOpgestart(Gebruiker asielzoeker){
+        System.out.println();
+        System.out.println("UPDATE MELDING (Asielzoeker): ");
         System.out.println(getNaam() + " " + getAchternaam() + ": Uw plaatsing in een eigen woning is opgestart.");
     }
+
+    @Override
+    public void updateWoningAfgerond(Gebruiker asielzoeker) {
+        System.out.println();
+        System.out.println("UPDATE MELDING: (Asielzoeker): ");
+        System.out.println(getNaam() + " " + getAchternaam() + ": Uw plaatsing in een eigen woning is voltooid.");
+    }
+
     public static void main(String[] args) {
         Asielzoeker aslz = new Asielzoeker();
         aslz.actieUitvoeren();
