@@ -1,10 +1,12 @@
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
     private boolean coaMedewerker;
     private DossierEditor dossierEditor = new DossierEditor();
     private Asielzoeker asielzoeker;
     private Archief archief;
+    private final Scanner scanner = new Scanner(System.in);
 
     public CoaMedewerker(String naam, String achternaam, LocalDate geboortedatum, boolean coaMedewerker) {
         super(naam, achternaam, geboortedatum);
@@ -12,6 +14,9 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
     }
 
     public CoaMedewerker() {
+    }
+    public Asielzoeker getAsielzoeker(){
+        return this.asielzoeker;
     }
 
     public boolean isCoaMedewerker() {
@@ -21,6 +26,8 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
     public void setCoaMedewerker(boolean coaMedewerker) {
         this.coaMedewerker = coaMedewerker;
     }
+
+
 
     public void actieUitvoeren() {
         System.out.println();
@@ -106,9 +113,22 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
                     }
 
                 }
-                else {
+                else if(paspoort && !familie && asielzoekerBool){
+                    DossierEditor.invullenStandaardArchief(archief, this.asielzoeker);
+                    System.out.println();
+                    System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
+                    dossierEditor.uitlezenArchief(archief);
+                    System.out.println(this.asielzoeker.getNaam() + " " + this.asielzoeker.getAchternaam() + ": heeft geen familie ");
+
+                }
+
+                else if(!paspoort && asielzoekerBool)
+                {
                     System.out.println();
                     System.out.println("De asielzoeker kan geen paspoort tonen, dus het dossier kan niet worden aangemaakt");
+                }
+                else if (!asielzoekerBool) {
+                    System.out.println("Dit persoon is geen asielzoeker, dus de registratie is afgebroken");
                 }
 
     }
@@ -274,6 +294,28 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
     public static void main(String[] args) {
         CoaMedewerker coaMed = new CoaMedewerker();
         coaMed.actieUitvoeren();
+    }
+
+    public void registratieVoltooienPrint(Boolean asielzoekerBool, boolean paspoort, boolean familie){
+
+        if(paspoort && familie && asielzoekerBool) {
+            System.out.println("Dit persoon heeft een paspoort, familie en is een asielzoeker.");
+
+        }
+        else if(paspoort && !familie && asielzoekerBool){
+            System.out.println("Dit persoon heeft een paspoort, is geen familie en is een asielzoeker");
+
+        }
+
+        else if(!paspoort && asielzoekerBool)
+        {
+            System.out.println();
+            System.out.println("De asielzoeker kan geen paspoort tonen, dus het dossier kan niet worden aangemaakt");
+        }
+        else if (!asielzoekerBool) {
+            System.out.println("Dit persoon is geen asielzoeker, dus de registratie is afgebroken");
+        }
+
     }
 
 }

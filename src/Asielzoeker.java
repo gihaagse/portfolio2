@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.time.Period;
 
 public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     private static final Scanner scanner = new Scanner(System.in);
@@ -10,6 +11,7 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     private Archief archief;
     private DossierEditor dossierEditor = new DossierEditor();
     private Familie familie;
+    private LocalDate geboorteDatum;
 
 
     public Asielzoeker(){}
@@ -50,6 +52,32 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     public void setLandVanHerkomst(Land landVanHerkomst) {
         this.landVanHerkomst = landVanHerkomst;
     }
+
+    public int getLeeftijd() {
+        if (geboorteDatum != null) {
+            LocalDate currentDate = LocalDate.now();
+            return Period.between(geboorteDatum, currentDate).getYears();
+        }
+        else {
+            return -1;
+        }
+    }
+
+    public void printLevensFase(int leeftijd){
+        System.out.print("De asielzoeker is een: ");
+        if (leeftijd <= 17) {
+            System.out.println("Kind");
+        }
+        else if (leeftijd <= 64) {
+            System.out.println("Volwassene");
+        }
+        else {
+            System.out.println("Oudere");
+        }
+
+    }
+
+
 
     @Override
     public void actieUitvoeren() {
@@ -134,6 +162,44 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
         System.out.println("UPDATE MELDING: (Asielzoeker): ");
         System.out.println(getNaam() + " " + getAchternaam() + ": Uw plaatsing in een eigen woning is voltooid.");
     }
+
+    public static int toelatingskansBerekenen(Gender gender, boolean isAsielzoeker, boolean heeftFamilie, int leeftijd) {
+        int score = 0;
+
+
+            switch (gender) {
+                case VROUW:
+                    score += 4;
+                    break;
+                case MAN:
+                    score += 3;
+                    break;
+                case GEEN:
+                    score += 1;
+                    break;
+                default:
+                    score += 0;
+                    break;
+            }
+
+
+        if (isAsielzoeker) {
+            score += 1;
+        }
+
+        if (heeftFamilie) {
+            score += 2;
+        }
+
+        if (leeftijd < 18) {
+            score += 3;
+        } else if (leeftijd >= 18) {
+            score += 1;
+        }
+
+        return score;
+    }
+
 
     public static void main(String[] args) {
         Asielzoeker aslz = new Asielzoeker();
