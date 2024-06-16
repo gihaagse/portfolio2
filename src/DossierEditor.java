@@ -2,6 +2,7 @@ public class DossierEditor {
 
     public static void invullenStandaardArchief(Archief archief, Gebruiker asielzoeker){
         archief.invullenStandaardArchief(asielzoeker);
+        asielzoeker.setArchief(archief);
     }
 
     public void uitlezenArchief(Archief archief){

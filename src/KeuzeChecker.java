@@ -53,6 +53,7 @@ public class KeuzeChecker {
     }
 
     public static void returnNaarHoofdmenu(StdActies stdactie) {
+        System.out.println();
         System.out.println("Wilt u nog een actie uitvoeren of teruggaan naar het inlogscherm?");
         System.out.println("1) Nog een actie uitvoeren");
         System.out.println("2) Teruggaan naar het inlogscherm");

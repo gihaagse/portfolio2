@@ -112,5 +112,6 @@ public abstract class Gebruiker {
     Archief getArchief(){
         return null;
     }
+    public void setArchief(Archief archief){}
 
 }

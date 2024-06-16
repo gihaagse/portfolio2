@@ -85,6 +85,7 @@ public class Beheerder extends Gebruiker {
     }
 
     void veranderenVeiligheidLand() {
+        System.out.println();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Van welk land wilt u de veiligheid veranderen?");
         ArrayList<Integer> landNummer = new ArrayList<>();

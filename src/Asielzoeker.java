@@ -9,6 +9,7 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     private Land landVanHerkomst;
     private Archief archief;
     private DossierEditor dossierEditor = new DossierEditor();
+    private Familie familie;
 
 
     public Asielzoeker(){}
@@ -16,7 +17,6 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
         super(naam, achternaam, geboortedatum);
         this.asielzoeker = asielzoeker;
     }
-
 
     public void setArchief(Archief archief){
         this.archief = archief;
@@ -50,8 +50,10 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     public void setLandVanHerkomst(Land landVanHerkomst) {
         this.landVanHerkomst = landVanHerkomst;
     }
+
     @Override
     public void actieUitvoeren() {
+        System.out.println();
         System.out.println("Wat voor actie wilt u uitvoeren?");
         System.out.println("1) Nieuw adres registreren");
         System.out.println("2) Status van dossier inzien");

@@ -4,6 +4,7 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
     private boolean coaMedewerker;
     private DossierEditor dossierEditor = new DossierEditor();
     private Asielzoeker asielzoeker;
+    private Archief archief;
 
     public CoaMedewerker(String naam, String achternaam, LocalDate geboortedatum, boolean coaMedewerker) {
         super(naam, achternaam, geboortedatum);
@@ -22,7 +23,7 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
     }
 
     public void actieUitvoeren() {
-
+        System.out.println();
         System.out.println("Wat voor actie wilt u uitvoeren?");
         System.out.println("1) Vluchteling registreren");
         System.out.println("2) Dossier aanpassen (niet de volledige user story, alleen simpele aanpassingen om udpates vanaf het dossier aan te tonen)");
@@ -44,76 +45,95 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
 
         KeuzeChecker.returnNaarHoofdmenu(this);
 
-
-
     }
 
 
 
 
     public void registrerenVluchteling() {
+
+        startRegistratieVluchteling();
+
+        System.out.println("Kan de betreffende asielzoeker een paspoort tonen?");
+        System.out.println("1) Ja");
+        System.out.println("2) Nee");
+        System.out.println();
+        int keuzePaspoort = KeuzeChecker.keuzeCheck(2);
+
+        System.out.println("Heeft de betreffende asielzoekr een familie?");
+        System.out.println("1) Ja");
+        System.out.println("2) Nee");
+        int keuzeFamilie = KeuzeChecker.keuzeCheck(2);
+
+        boolean paspoort = (keuzePaspoort==1);
+        boolean familie = (keuzeFamilie==1);
+
+        registratieVoltooien(true, paspoort, familie);
+
+
+    }
+
+    public void startRegistratieVluchteling(){
+        System.out.println();
         System.out.println("U heeft gekozen voor het registreren van een vluchteling.");
         System.out.println("Voer alstublieft de volgende gegevens in van de vluchteling");
         System.out.println();
 
         asielzoeker = new Asielzoeker();
         MaakUsers.nieuweGebruikerMaken(asielzoeker);
-        Archief archief = new Dossier();
+        archief = new Dossier();
         asielzoeker.setArchief(archief);
         Main.asielzoekers.add(asielzoeker);
+        dossierEditor.subscribeArchiefUpdates(archief, asielzoeker);
+    }
 
-        System.out.println("Kan de betreffende asielzoeker een paspoort tonen?");
-        System.out.println("1) Ja");
-        System.out.println("2) Nee");
-        int keuze = KeuzeChecker.keuzeCheck(2);
+    public void registratieVoltooien(Boolean asielzoekerBool, boolean paspoort, boolean familie){
 
-        switch (keuze){
-            case 1:
-                DossierEditor.invullenStandaardArchief(archief, asielzoeker);
-                dossierEditor.subscribeArchiefUpdates(archief, asielzoeker);
-                System.out.println();
-                System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
-                dossierEditor.uitlezenArchief(archief);
-                break;
-            case 2:
-                System.out.println();
-                System.out.println("De asielzoeker kan geen paspoort tonen, dus het dossier kan niet worden aangemaakt");
-                break;
-            default:
-                System.out.println("Geen keuze");
-                break;
+                if(paspoort && familie && asielzoekerBool) {
+                    registrerenFamilie(this.asielzoeker);
+                    DossierEditor.invullenStandaardArchief(archief, this.asielzoeker);
+                    System.out.println();
+                    System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
+                    dossierEditor.uitlezenArchief(archief);
+
+                    for (Familie fam : Main.families) {
+                        for (Asielzoeker asielzoeker : fam.getFamilieLeden()) {
+                            if (asielzoeker.equals(this.asielzoeker)) {
+                                System.out.println("De familie van " + this.asielzoeker.getNaam() + " " + this.asielzoeker.getAchternaam() + " is: " + fam.getFamilienaam());
+                                return;
+                            }
+                        }
+                    }
+
+                }
+                else {
+                    System.out.println();
+                    System.out.println("De asielzoeker kan geen paspoort tonen, dus het dossier kan niet worden aangemaakt");
+                }
+
+    }
+
+    public void registrerenFamilie(Asielzoeker asielzoeker){
+        System.out.println();
+        System.out.println("Tot welke famililie behoord de vluchteling?");
+
+        int familieKeuze = 1;
+        for (Familie families: Main.families){
+            System.out.println(familieKeuze + ") " + families.getFamilienaam());
+            familieKeuze += 1;
         }
 
-    }
+        int gekozenFamilie = KeuzeChecker.keuzeCheck(Main.families.size());
 
-    @Override
-    public void updateWoningOpgestart(Gebruiker asielzoeker) {
-        System.out.println();
-        System.out.println("UPDATE MELDING (Coa Medewerker): ");
-        System.out.println("De plaatsing in een eigen woning van " + asielzoeker.getNaam() + " " + asielzoeker.getAchternaam() + " is opgestart." );
-    }
-
-    @Override
-    public void updateWoningAfgerond(Gebruiker asielzoeker) {
-        System.out.println();
-        System.out.println("UPDATE MELDING (Coa Medewerker): ");
-        System.out.println("De plaatsing in een eigen woning van " + asielzoeker.getNaam() + " " + asielzoeker.getAchternaam() + " is afgerond.");
+        Main.families.get(gekozenFamilie-1).setFamilieLeden(asielzoeker);
 
     }
 
-    @Override
-    public Dossier getArchief() {
-        return null;
-    }
-
-    @Override
-    public void setArchief(Archief archief) {
-
-    }
 
     void opvragenGemeente() {}
 
     void bijwerkenDossier() {
+        System.out.println();
         System.out.println("U heeft gekozen voor het aanpassen van een dossier.");
         System.out.println("Welk dossier wilt u aanpassen?");
         System.out.println();
@@ -224,6 +244,32 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
 
     }
 
+
+
+    @Override
+    public void updateWoningOpgestart(Gebruiker asielzoeker) {
+        System.out.println();
+        System.out.println("UPDATE MELDING (Coa Medewerker): ");
+        System.out.println("De plaatsing in een eigen woning van " + asielzoeker.getNaam() + " " + asielzoeker.getAchternaam() + " is opgestart." );
+    }
+
+    @Override
+    public void updateWoningAfgerond(Gebruiker asielzoeker) {
+        System.out.println();
+        System.out.println("UPDATE MELDING (Coa Medewerker): ");
+        System.out.println("De plaatsing in een eigen woning van " + asielzoeker.getNaam() + " " + asielzoeker.getAchternaam() + " is afgerond.");
+
+    }
+
+    @Override
+    public Dossier getArchief() {
+        return null;
+    }
+
+    @Override
+    public void setArchief(Archief archief) {
+
+    }
 
     public static void main(String[] args) {
         CoaMedewerker coaMed = new CoaMedewerker();
