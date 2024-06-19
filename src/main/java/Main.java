@@ -45,6 +45,7 @@ public class Main {
         }
 
         else{
+            System.out.println();
             System.out.println("Voer het nummer in van het account waarmee u wilt inloggen");
             switch (rol){
                 case 1:
@@ -96,7 +97,6 @@ public class Main {
         dossierEditor.subscribeArchiefUpdates(dossier1, voorbeeldAsielzoeker1);
         dossierEditor.subscribeArchiefUpdates(dossier2, voorbeeldAsielzoeker2);
         dossierEditor.subscribeArchiefUpdates(dossier3, voorbeeldAsielzoeker3);
-
         CoaMedewerker voorbeeldCoaMedewerker1 = new CoaMedewerker("Coa", "Lita", LocalDate.of(1984, 7, 21), true);
         coaMedewerkers.add(voorbeeldCoaMedewerker1);
 
@@ -112,8 +112,8 @@ public class Main {
     public static int startupKeuze(){
         System.out.println();
         System.out.println("Welkom in het programma");
-        System.out.println();
 
+        System.out.println();
         System.out.println("Kies uw rol:");
         System.out.println("1) Beheerder");
         System.out.println("2) COA-medewerker");
@@ -123,12 +123,12 @@ public class Main {
 
         System.out.print("Uw rol is ");
         KeuzeChecker.printRol(rol);
-        System.out.println();
 
         return rol;
     }
 
     public static int inlogKeuze(){
+        System.out.println();
         System.out.println("Wilt u een nieuwe gebruiker aanmaken voor deze rol of wilt u inloggen met een bestaand account?");
         System.out.println("1) Nieuwe gebruiker aanmaken");
         System.out.println("2) Inloggen met een bestaand account (Voor nu kiezen uit lijst)");

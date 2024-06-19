@@ -107,7 +107,6 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
     }
 
 
-    void gegevensOpvragen() {}
 
     @Override
     void opvragenStatusDossier() {

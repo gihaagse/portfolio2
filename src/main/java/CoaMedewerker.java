@@ -61,12 +61,14 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
 
         startRegistratieVluchteling();
 
+        System.out.println();
         System.out.println("Kan de betreffende asielzoeker een paspoort tonen?");
         System.out.println("1) Ja");
         System.out.println("2) Nee");
         System.out.println();
         int keuzePaspoort = KeuzeChecker.keuzeCheck(2);
 
+        System.out.println();
         System.out.println("Heeft de betreffende asielzoeker een familie?");
         System.out.println("1) Ja");
         System.out.println("2) Nee");
@@ -84,7 +86,6 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
         System.out.println();
         System.out.println("U heeft gekozen voor het registreren van een vluchteling.");
         System.out.println("Voer alstublieft de volgende gegevens in van de vluchteling");
-        System.out.println();
 
         asielzoeker = new Asielzoeker();
         MaakUsers.nieuweGebruikerMaken(asielzoeker);
@@ -101,16 +102,9 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
                     DossierEditor.invullenStandaardArchief(archief, this.asielzoeker);
                     System.out.println();
                     System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
-                    dossierEditor.uitlezenArchief(archief, this.asielzoeker);
 
-                    for (Familie fam : Main.families) {
-                        for (Asielzoeker asielzoeker : fam.getFamilieLeden()) {
-                            if (asielzoeker.equals(this.asielzoeker)) {
-                                System.out.println("De familie van " + this.asielzoeker.getNaam() + " " + this.asielzoeker.getAchternaam() + " is: " + fam.getFamilienaam());
-                                return;
-                            }
-                        }
-                    }
+                    dossierEditor.uitlezenArchief(archief, this.asielzoeker);
+                    familieZoeker();
 
                 }
                 else if(paspoort && !familie && asielzoekerBool){
@@ -149,8 +143,6 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
 
     }
 
-
-    void opvragenGemeente() {}
 
     void bijwerkenDossier() {
         System.out.println();
@@ -316,6 +308,17 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
             System.out.println("Dit persoon is geen asielzoeker, dus de registratie is afgebroken");
         }
 
+    }
+
+    public void familieZoeker(){
+        for (Familie fam : Main.families) {
+            for (Asielzoeker asielzoeker : fam.getFamilieLeden()) {
+                if (asielzoeker.equals(this.asielzoeker)) {
+                    System.out.println("De familie van " + this.asielzoeker.getNaam() + " " + this.asielzoeker.getAchternaam() + " is: " + fam.getFamilienaam());
+                    return;
+                }
+            }
+        }
     }
 
 }
