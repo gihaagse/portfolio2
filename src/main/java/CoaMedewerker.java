@@ -33,7 +33,7 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
         System.out.println();
         System.out.println("Wat voor actie wilt u uitvoeren?");
         System.out.println("1) Vluchteling registreren");
-        System.out.println("2) Dossier aanpassen (niet de volledige user story, alleen simpele aanpassingen om udpates vanaf het dossier aan te tonen)");
+        System.out.println("2) Dossier aanpassen");
         System.out.println();
 
         int keuze = KeuzeChecker.keuzeCheck(2);
@@ -67,7 +67,7 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
         System.out.println();
         int keuzePaspoort = KeuzeChecker.keuzeCheck(2);
 
-        System.out.println("Heeft de betreffende asielzoekr een familie?");
+        System.out.println("Heeft de betreffende asielzoeker een familie?");
         System.out.println("1) Ja");
         System.out.println("2) Nee");
         int keuzeFamilie = KeuzeChecker.keuzeCheck(2);
@@ -101,7 +101,7 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
                     DossierEditor.invullenStandaardArchief(archief, this.asielzoeker);
                     System.out.println();
                     System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
-                    dossierEditor.uitlezenArchief(archief);
+                    dossierEditor.uitlezenArchief(archief, this.asielzoeker);
 
                     for (Familie fam : Main.families) {
                         for (Asielzoeker asielzoeker : fam.getFamilieLeden()) {
@@ -116,8 +116,8 @@ public class CoaMedewerker extends Gebruiker implements Observer, StdActies{
                 else if(paspoort && !familie && asielzoekerBool){
                     DossierEditor.invullenStandaardArchief(archief, this.asielzoeker);
                     System.out.println();
-                    System.out.println("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker:");
-                    dossierEditor.uitlezenArchief(archief);
+                    System.out.print("De volgende gegevens zijn ingevuld in het dossier van de asielzoeker: ");
+                    dossierEditor.uitlezenArchief(archief, this.asielzoeker);
                     System.out.println(this.asielzoeker.getNaam() + " " + this.asielzoeker.getAchternaam() + ": heeft geen familie ");
 
                 }

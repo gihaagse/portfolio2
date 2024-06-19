@@ -5,8 +5,8 @@ public class DossierEditor {
         asielzoeker.setArchief(archief);
     }
 
-    public void uitlezenArchief(Archief archief){
-        archief.uitlezenArchief();
+    public void uitlezenArchief(Archief archief, Asielzoeker asielzoeker){
+        archief.uitlezenArchief(asielzoeker);
     }
 
     public void subscribeArchiefUpdates (Archief archief, Observer observer){

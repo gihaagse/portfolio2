@@ -115,7 +115,7 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
             System.out.println("Het dossier is nog leeg");
         }
         else{
-            dossierEditor.uitlezenArchief(archief);
+            dossierEditor.uitlezenArchief(archief, this);
         }
 
     }

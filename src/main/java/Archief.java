@@ -1,6 +1,6 @@
 public interface Archief {
     void invullenStandaardArchief(Gebruiker asielzoeker);
-    void uitlezenArchief();
+    void uitlezenArchief(Asielzoeker asielzoeker);
     void subscribeArchiefUpdates(Observer observer);
     void unsubscribeArchiefUpdates(Observer observer);
 

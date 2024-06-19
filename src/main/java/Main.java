@@ -78,6 +78,9 @@ public class Main {
         landen.add(voorbeeldLand2);
         landen.add(voorbeeldLand3);
 
+        Beheerder voorbeeldBeheerder1 = new Beheerder("Bob", "Pieters", LocalDate.of(1977, 4, 8), true);
+        beheerders.add(voorbeeldBeheerder1);
+
         Asielzoeker voorbeeldAsielzoeker1 = new Asielzoeker("Tak", "Lak", LocalDate.of(1980, 8, 20), true);
         Asielzoeker voorbeeldAsielzoeker2 = new Asielzoeker("Pita", "Zaki", LocalDate.of(1975, 4, 25), true);
         Asielzoeker voorbeeldAsielzoeker3 = new Asielzoeker("Maki", "Zehn", LocalDate.of(1999, 3, 2), true);

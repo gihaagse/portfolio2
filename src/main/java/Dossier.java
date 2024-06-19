@@ -36,7 +36,7 @@ public class Dossier implements Archief{
             }
         } else if (eigenWoning == AfrondingWoning.AFGEROND) {
             for (Observer obs: observers) {
-                obs.updateWoningOpgestart(asielzoeker);
+                obs.updateWoningAfgerond(asielzoeker);
             }
         }
     }
@@ -57,27 +57,47 @@ public class Dossier implements Archief{
         this.observers = observers;
     }
     @Override
-    public void uitlezenArchief(){
-    if (getAfrondingAsiel() == null) {
+    public void uitlezenArchief(Asielzoeker asielzoeker){
+        System.out.println();
+        System.out.println("Het dossier van: " + asielzoeker.getNaam() + " " + asielzoeker.getAchternaam());
+
+        Gender gender = asielzoeker.getGender();
+        if(gender == null){
+            System.out.println("Gender: Onbekend");
+        }
+        else {
+            System.out.println("Gender: " + gender);
+        }
+        asielzoeker.printLevensFase(asielzoeker.getLeeftijd());
+        System.out.println();
+
+        if (getAfrondingAsiel() == null) {
         System.out.println("Asielaanvraag is niet ingevuld.");
-    } else {
+        }
+        else {
         System.out.println("Asielaanvraag is afgerond: " + getAfrondingAsiel());
-    }
-    if (getUitspraakIND() == null) {
+        }
+
+        if (getUitspraakIND() == null) {
         System.out.println("Uitspraak IND is niet ingevuld.");
-    } else {
+        }
+        else {
         System.out.println("Uitspraak IND: " + getUitspraakIND());
-    }
-    if (getEigenWoning() == null) {
+        }
+
+        if (getEigenWoning() == null) {
         System.out.println("Plaatsing in eigen woning is niet ingevuld.");
-    } else {
+        }
+        else {
         System.out.println("Plaatsing in eigen woning: " + getEigenWoning());
-    }
-    if (getTerugNaarLand() == null) {
+        }
+
+        if (getTerugNaarLand() == null) {
         System.out.println("Teruggekeerd naar het land van herkomst is niet ingevuld.");
-    } else {
+        }
+        else {
         System.out.println("Teruggekeerd naar het land van herkomst: " + getTerugNaarLand());
-    }
+        }
 
     }
     @Override
