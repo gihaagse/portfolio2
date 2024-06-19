@@ -42,10 +42,12 @@ public class Beheerder extends Gebruiker {
 
     public void toevoegenLand() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println();
         System.out.println("Wat is de naam van het land dat u wilt toevoegen?");
         System.out.println("Land:");
         String landNaam = scanner.nextLine();
 
+        System.out.println();
         System.out.println("Is dit land veilig of onveilig?");
         System.out.println("1) veilig");
         System.out.println("2) onveilig");
@@ -71,7 +73,7 @@ public class Beheerder extends Gebruiker {
             System.out.println("onveilig.");
         }
 
-
+        System.out.println();
         System.out.println("Wilt u nog een actie uitvoeren of teruggaan naar het inlogscherm?");
         System.out.println("1) Nog een actie uitvoeren");
         System.out.println("2) Teruggaan naar het inlogscherm");

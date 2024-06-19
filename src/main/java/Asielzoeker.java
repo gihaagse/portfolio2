@@ -138,11 +138,16 @@ public class Asielzoeker extends Gebruiker implements Observer, StdActies{
             setAdres(new Woonplaats(nieuwAdres, stad, postcode));
 
             System.out.println();
-            System.out.println("Uw nieuwe adres is: " + adres + ".");
+            System.out.println("Uw nieuwe adres is: " + adres.getAdres() + ".");
 
             getArchief().setEigenWoning(AfrondingWoning.AFGEROND, this);
 
         }
+        else if(getArchief().getEigenWoning() == AfrondingWoning.AFGEROND){
+            System.out.println();
+            System.out.println("De plaatsing in een eigen woning is al afgerond");
+        }
+
         else {
             System.out.println();
             System.out.println("De plaatsing in een eigen woning is nog niet opgestart, dus het nieuwe adres kan nog niet geregistreerd worden.");
